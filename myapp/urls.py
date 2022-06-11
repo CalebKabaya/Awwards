@@ -1,5 +1,7 @@
 from django.urls import re_path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns=[
     re_path('^$',views.welcome,name='welcome'),
@@ -7,9 +9,16 @@ urlpatterns=[
     re_path('register/',views.register,name='register'),
     re_path('signout/',views.signout,name='signout'),
     re_path('profile/',views.profile,name='profile'),
+    re_path('addpost/',views.addpost,name='addpost'),
+    re_path('new-project/', views.postproject, name='newproject'),
+
+
 
 
 ]
+if settings.DEBUG:
+    urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
 
    
 
