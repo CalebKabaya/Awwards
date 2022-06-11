@@ -2,19 +2,109 @@
 {% block title %} Sign Up Page {% endblock %}
 
 {% block content%}
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <h2>User Profile</h2>
-            {{my_profile.bio}}
-            
-
-            {% if my_profile.profile_picture%}
-            <img src="{{my_profile.profile_picture.url}}" alt="profile_picture">
-            {% else%}
-            <h1>No Image</h1>
-            {% endif %}
+<section style="background-color: #eee;">
+    <div class="container py-5">
+      <div class="row">
+        <div class="col">
+          <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+            <ol class="breadcrumb mb-0">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="#">User</a></li>
+              <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+            </ol>
+          </nav>
         </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <div class="card-body text-center">
+                {% if my_profile.profile_picture%}
+                <img src="{{my_profile.profile_picture.url}}" alt="profile_picture"
+                class="img-fluid"
+                style="width: 240px; border-radius: 80px;">
+
+                {% else%}
+                <h1>No Image</h1>
+                {% endif %}
+              <h5 class="my-3">{{user.username}}</h5>
+              <div class="d-flex justify-content-center mb-2">
+                <button type="button" class="btn btn-primary">Follow</button>
+                <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+              </div>
+            </div>
+          </div>
+          <div class="card mb-4 mb-lg-0">
+            <div class="card-body p-0">
+              <ul class="list-group list-group-flush rounded-3">
+                
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fab fa-github fa-lg" style="color: #333333;"></i>
+                  <!-- <a href="">https://www.github.com/<p class="mb-0"></p></a> -->
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                    <i class="fas fa-globe fa-lg text-warning"></i>
+                  </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Full Name</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{my_profile.name}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Email</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{my_profile.contact_email}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Bio</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{my_profile.bio}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Address</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{my_profile.location}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+         
+        </div>
+      </div>
     </div>
-</div>
+  </section>
+
 {% endblock%}
+
+

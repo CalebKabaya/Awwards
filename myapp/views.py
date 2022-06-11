@@ -1,10 +1,12 @@
 from django.contrib import messages
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render,get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import login,authenticate,logout
 from .models import Profile,Post
-from .forms import PostForm
+from .forms import PostForm, UpdateUserForm, UpdateUserProfileForm
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, Http404,HttpResponseRedirect
+
 
 # Create your views here.
 
@@ -47,6 +49,15 @@ def register(request):
         new_user.save() 
         return render (request,'login.html')
     return render(request,'register.html')
+
+def user_profile(request, username):
+    user_prof = get_object_or_404(User, username=username)
+    if request.user == user_prof:
+        return redirect('profile', username=request.user.username)
+    params = {
+        'user_prof': user_prof,
+    }
+    return render(request, 'userprofile.html', params)
 
 def profile(request):
     user=request.user
@@ -93,3 +104,44 @@ def postproject(request):
     }
     return render(request, 'newpost.html', context)
 
+# @login_required(login_url='/accounts/login/')
+# def update_profile(request,username):
+#     user =User.objects.get(username=username)
+#     if request.method == 'POST':
+#         user_from=UpdateUserForm(request.Post,instance=request.user)
+#         prof_form=UpdateUserProfileForm(request.Post,request.FILES,instance=request.user.profile)
+#         if user_from.is_valid() and prof_form.is_valid():
+#             user_from.save
+#             prof_form.save
+#             return redirect('profile', user.username)
+#         else:
+#             user_form=UpdateUserForm(instance=request.user) 
+#             prof_form=UpdateUserProfileForm(instance=request.user.profile)  
+#         params={
+#             'user_form':user_form,
+#             'prof_form':prof_form,
+#         } 
+#         return render(request,'update.html',params)     
+
+
+@login_required(login_url='login')
+def update_profile(request):
+    # images = request.user.profile.posts.all()
+    # images = Post.objects.all()  
+    if request.method == 'POST':
+        user_form = UpdateUserForm(request.POST, instance=request.user)
+        prof_form = UpdateUserProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        if user_form.is_valid() and prof_form.is_valid():
+            user_form.save()
+            prof_form.save()
+            return HttpResponseRedirect(request.path_info)
+    else:
+        user_form = UpdateUserForm(instance=request.user)
+        prof_form = UpdateUserProfileForm(instance=request.user.profile)
+    contex = {
+        'user_form': user_form,
+        'prof_form': prof_form,
+        # 'images': images,
+
+    }
+    return render(request, 'update.html', contex)

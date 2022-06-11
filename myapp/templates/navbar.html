@@ -19,54 +19,59 @@
                 <li class="nav-item">
                     <!-- <a class="nav-link" href="#">Dashboard</a> -->
                     <form class="d-flex input-group w-auto">
-                        <input
-                          type="search"
-                          class="form-control rounded"
-                          placeholder="Search"
-                          aria-label="Search"
-                          aria-describedby="search-addon"
-                        />
+                        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                            aria-describedby="search-addon" />
                         <span class="input-group-text border-0" id="search-addon">
-                          <i class="fas fa-search"></i>
+                            <i class="fas fa-search"></i>
                         </span>
-                      </form>
+                    </form>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="#">Hello {{request.user}}</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link {% block profileactive %} {% endblock profileactive %}" href="/profile/">Profile</a>
-                  </li>
+                </li>
+                <!-- Default dropright button -->
+                <div class="btn-group dropend">
+                    <button type="button" class="btn btn-dark dropdown-toggle" data-mdb-toggle="dropdown"
+                        aria-expanded="false">
+                        Profile
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/profile/">My Profile</a></li>
+                        <li><a class="dropdown-item" href="{% url 'update'  %}">Update Profile</a></li>                        
+                    </ul>
+                </div>
+               
             </ul>
-            <div>
-            <a href="{% url 'newproject' %}">
-                <button type="button" class="btn btn-dark btn-rounded">Upload Project</button>
 
-            </a>
-                
+            <div>
+                <a href="{% url 'newproject' %}">
+                    <button type="button" class="btn btn-dark btn-rounded">Upload Project</button>
+
+                </a>
+
 
             </div>
-           
-                    <a  class="nav-link" href="/signout/">
-                        <button type="button" class="btn btn-light btn-rounded">Logout</button>
 
-                    </a>
-             
-            
+            <a class="nav-link" href="/signout/">
+                <button type="button" class="btn btn-light btn-rounded">Logout</button>
+
+            </a>
+
+
             {%else%}
             <!-- Left links -->
-           
+
 
             <div class="d-flex align-items-center">
-                
+
                 <a href="{% url 'login' %}">
                     <button type="button" class="btn btn-light mr-5 ml-5" data-mdb-ripple-color="dark">Login</button>
-    
+
                 </a>
 
                 <a href="{% url 'register'%}"><button type="button" class="btn btn-dark me-3">
-                    Sign up for free
-                </button></a>
+                        Sign up for free
+                    </button></a>
                 <!-- <a class="btn btn-dark px-3" href="https://github.com/mdbootstrap/mdb-ui-kit" role="button"><i
                         class="fab fa-github"></i></a> -->
             </div>

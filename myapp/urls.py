@@ -11,6 +11,16 @@ urlpatterns=[
     re_path('profile/',views.profile,name='profile'),
     re_path('addpost/',views.addpost,name='addpost'),
     re_path('new-project/', views.postproject, name='newproject'),
+    # re_path('<username>/profile', views.user_profile, name='userprofile'),
+    # re_path('profile/<username>/settings', views.update_profile, name='update'),
+    # re_path('user_profile/<username>/', views.user_profile, name='user_profile'),
+    re_path('update', views.update_profile, name='update'),
+
+    
+
+
+
+
 
 
 
