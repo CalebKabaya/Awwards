@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %} Sign Up Page {% endblock %}
+
+{% block content%}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>User Profile</h2>
+            {{my_profile.bio}}
+            
+
+            {% if my_profile.profile_picture%}
+            <img src="{{my_profile.profile_picture.url}}" alt="profile_picture">
+            {% else%}
+            <h1>No Image</h1>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock%}
