@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from django.contrib.auth import login,authenticate,logout
-
+from .models import Profile,Post
 
 # Create your views here.
 
@@ -43,3 +43,13 @@ def register(request):
         new_user.save() 
         return render (request,'login.html')
     return render(request,'register.html')
+
+def profile(request):
+    user=request.user
+    my_profile=Profile.objects.get(user=user)
+    return render(request,"profile.html",{'my_profile':my_profile,"user":user})
+
+def signout(request):
+    logout(request)
+    messages.success(request,"You have logged out, we will be glad to have you back again")
+    return redirect ("login")
