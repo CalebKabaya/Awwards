@@ -3,7 +3,7 @@
     <!-- Container wrapper -->
     <div class="container">
         <!-- Navbar brand -->
-        <a class="navbar-brand me-2" href="">Awwards</a>
+        <a class="navbar-brand me-2" href="{% url 'welcome'%}">Awwards</a>
 
         <!-- Toggle button -->
         <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarButtonsExample"
@@ -38,11 +38,21 @@
                     <a class="nav-link {% block profileactive %} {% endblock profileactive %}" href="/profile/">Profile</a>
                   </li>
             </ul>
-            <ul>
-                <li class="nav-item">
-                    <a class="nav-link" href="/signout/">Logout</a>
-                  </li>
-            </ul>
+            <div>
+            <a href="{% url 'newproject' %}">
+                <button type="button" class="btn btn-dark btn-rounded">Upload Project</button>
+
+            </a>
+                
+
+            </div>
+           
+                    <a  class="nav-link" href="/signout/">
+                        <button type="button" class="btn btn-light btn-rounded">Logout</button>
+
+                    </a>
+             
+            
             {%else%}
             <!-- Left links -->
            
