@@ -136,7 +136,9 @@ def update_profile(request):
         if user_form.is_valid() and prof_form.is_valid():
             user_form.save()
             prof_form.save()
-            return HttpResponseRedirect(request.path_info)
+            # return HttpResponseRedirect(request.path_info)
+            return redirect('profile')
+
     else:
         user_form = UpdateUserForm(instance=request.user)
         prof_form = UpdateUserProfileForm(instance=request.user.profile)
@@ -209,10 +211,3 @@ def project(request,post_id):
     }
     return render(request, 'singleproject.html', params)
 
-# @login_required(login_url='login')
-# def vote(request,post_id):
-#     try:
-#         post = Post.objects.get(id = post_id)
-#     except DoesNotExist:
-#         raise Http404()
-#     return render(request,"vote.html", {"post":post})
