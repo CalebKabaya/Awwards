@@ -11,4 +11,38 @@ h1{
     width: 25%;
     border-radius: 50%;
 }
+#btn:hover{
+    background-color: black;
+    color: rgb(255, 255, 255);
+    outline-color: white;
+    transition: 0.9s;
+}
+#btn{
+    background-color: rgb(249, 0, 0);
+    color: rgb(255, 255, 255);
+    
+}
+#btn1:hover{
+    background-color: black;
+    color: rgb(255, 255, 255);
+    outline-color: white;
+    transition: 0.9s;
+}
+#btn1{
+    background-color: rgb(249, 0, 0);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    
+}
+#header{
+    font-weight: bolder;
+}
+#title1{
+    font-weight: bolder;
+    text-transform: uppercase;
+}
+.featured{
+    font-weight: bolder;
+    text-decoration: underline crimson 5px;
 
+}
