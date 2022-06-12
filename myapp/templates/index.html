@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-
-
-<div class="container">
+<div class="container mt-5">
   <div class="row">
     {% for post in all_post%}
 
@@ -11,7 +9,7 @@
       <div class="card h-100">
         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
           <img src="{{post.photo.url}}" class="img-fluid" />
-          <a href="{% url 'project'  %}">
+          <a href="{url 'project' post.title}">
             <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
           </a>
         </div>
@@ -38,3 +36,5 @@
 </div>
 
 {% endblock%}
+
+<!-- /project/{{post.id}} -->
