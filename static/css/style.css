@@ -7,4 +7,8 @@ h1{
 #add img{
     width: 100%;
 }
+#small img{
+    width: 25%;
+    border-radius: 50%;
+}
 
