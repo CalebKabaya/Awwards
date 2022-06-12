@@ -15,6 +15,8 @@ urlpatterns=[
     # re_path('profile/<username>/settings', views.update_profile, name='update'),
     # re_path('user_profile/<username>/', views.user_profile, name='user_profile'),
     re_path('update', views.update_profile, name='update'),
+    re_path('project/<post>', views.project, name='project'),
+
 
     
 
