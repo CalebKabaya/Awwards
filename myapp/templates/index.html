@@ -2,10 +2,72 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container mt-5">
+  <div class="featured">
+    <h3>Featured Project</h3>
+  </div>
+  <section id="content">
+    <div class="row">
+      <div class="col-md-8">
+        <img src="{{random_post.photo.url}}" class="img-fluid" />
+      </div>
+      <div class="col-md-4">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-4">
+              <p class="mb-0" id="header">Title:</p>
+            </div>
+            <div class="col-sm-8">
+              <p class="text-muted mb-0" id="title1">{{random_post.title}}</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-4">
+              <p class="mb-0" id="header">Description:</p>
+            </div>
+            <div class="col-sm-8">
+              <p class="text-muted mb-0">{{random_post.description}}</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-4">
+              <p class="mb-0" id="header">Posted By:</p>
+            </div>
+            <div class="col-sm-8">
+              <p class="text-muted mb-0">{{random_post.user.username|title}}</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-4">
+              <p class="mb-0" id="header">Date Posted:</p>
+            </div>
+            <div class="col-sm-8">
+              <p class="text-muted mb-0">{{random_post.date|date}}</p>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col-sm-4">
+            </div>
+            <div class="col-sm-8">
+              <a href="{{random_post.link}}" class="btn btn-outline-danger " style="text-align:center"id="btn1">Visit Project</a>
+
+            </div>
+          </div>
+        </div>
+
+    </div>
+    </div>
+
+  </section>
+</div>
+<div class="container mt-5">
+<h3 class="text-center mb-3" > Projects</h3>
   <div class="row">
     {% for post in all_post%}
 
-    <div class="col-md-3" id="cont">
+    <div class="col-md-3 mb-5" id="cont">
       <div class="card h-100">
         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
           <img src="{{post.photo.url}}" class="img-fluid" />
@@ -18,14 +80,14 @@
           <p class="card-text">{{post.description}}</p>
         </div>
         <div class="card-footer">
-          
-          <small class="text-muted" id="small"><img src="{{post.user.profile.profile_picture.url}}"
-            class="nav-img mr-2"
-            alt=""></small>
-            <small class="text-muted" id="small"> Posted By: {{post.user.username|title}}</small>
+
+          <small class="text-muted" id="small"><img src="{{post.user.profile.profile_picture.url}}" class="nav-img mr-2"
+              alt=""></small>
+          <small class="text-muted" id="small"> Posted By: {{post.user.username|title}}</small>
         </div>
         <div class="card-footer">
-          <small class="text-muted"><a href="{{post.link}}" class="tn btn-outline-dark">View</a> </small>
+          <small class="text-muted"><a href="{{post.link}}" class="btn btn-outline-danger" id="btn">View</a> </small>
+          <small class="text-muted" id="small" style="float:right">{{post.date|date}}</small>
         </div>
       </div>
 
