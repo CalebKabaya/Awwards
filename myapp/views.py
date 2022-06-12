@@ -2,8 +2,8 @@ from django.contrib import messages
 from django.shortcuts import redirect, render,get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import login,authenticate,logout
-from .models import Profile,Post
-from .forms import PostForm, UpdateUserForm, UpdateUserProfileForm
+from .models import Profile,Post, Rating
+from .forms import PostForm, RatingsForm, UpdateUserForm, UpdateUserProfileForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404,HttpResponseRedirect
 
@@ -145,3 +145,51 @@ def update_profile(request):
 
     }
     return render(request, 'update.html', contex)
+
+
+
+@login_required(login_url='login')
+def project(request,post):
+    post=Post.objects.get(title=post)
+    ratings=Rating.objects.filter(user=request,post=post).first()
+    rating_status=None
+    if ratings is None:
+        rating_status=False
+    else:
+        rating_status=True  
+    if request.method == 'POST':
+        form =RatingsForm(request.POST)
+        if form.is_valid():
+            rate=form.save(commit=False)
+            rate.user=request.user
+            rate.post=post
+            rate.save()
+            post_ratings=Rating.objects.filter(post=post)
+
+            desing_ratings=[d.desing for d in post_ratings]
+            desing_avarage=sum(desing_ratings)/len(desing_ratings)
+
+            usability_rating=[usa.usability for usa in post_ratings]
+            usability_avarage=sum(usability_rating)/ len(usability_rating)
+
+            content_rating=[cont.content for cont in post_ratings]
+            content_avarage=sum(content_rating)/len(content_rating)
+
+            score=(desing_avarage+usability_avarage+content_avarage)/3
+
+            rate.desing_avarage=round(desing_avarage,2)
+            rate.usability_avarage=round(usability_avarage,2)
+            rate.content_avarage=round(content_avarage,2)
+            rate.score=round(score,2)
+            rate.save()
+            return HttpResponseRedirect(request.path_info)
+    else:
+        form=RatingsForm()
+    params={
+        'post':post,
+        'rating_form':form,
+        'rating_status':rating_status
+    }
+    return render(request,'singleproject,html', params)  
+
+
