@@ -9,11 +9,11 @@
 
     {% for post in results%}
 
-    <div class="col-md-3" id="cont">
+    <div class="col-md-3 mb-5" id="cont">
       <div class="card h-100">
         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
           <img src="{{post.photo.url}}" class="img-fluid" />
-          <a href="{url 'project' post.title}">
+          <a href="{%url 'vote' post_id=post.id%}">
             <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
           </a>
         </div>
@@ -22,14 +22,14 @@
           <p class="card-text">{{post.description}}</p>
         </div>
         <div class="card-footer">
-          
-          <small class="text-muted" id="small"><img src="{{post.user.profile.profile_picture.url}}"
-            class="nav-img mr-2"
-            alt=""></small>
-            <small class="text-muted" id="small"> Posted By: {{post.user.username|title}}</small>
+
+          <small class="text-muted" id="small"><img src="{{post.user.profile.profile_picture.url}}" class="nav-img mr-2"
+              alt=""></small>
+          <small class="text-muted" id="small"> Posted By: {{post.user.username|title}}</small>
         </div>
         <div class="card-footer">
-          <small class="text-muted"><a href="{{post.link}}" class="tn btn-outline-dark">View</a> </small>
+          <small class="text-muted"><a href="{{post.link}}" class="btn btn-outline-danger" id="btn">View</a> </small>
+          <small class="text-muted" id="small" style="float:right">{{post.date|date}}</small>
         </div>
       </div>
 
