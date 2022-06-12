@@ -14,8 +14,16 @@ urlpatterns=[
     re_path('addpost/',views.addpost,name='addpost'),
     re_path('new-project/', views.postproject, name='newproject'),
     re_path('update', views.update_profile, name='update'),
-    re_path('project/<post>', views.project, name='project'),
+    # re_path('project/<post>', views.project, name='project'),
     re_path('search/', views.search_project, name='search'),
+    # re_path('project/<id>/',views.project,name = 'project')
+    # re_path(r'^vote/(?P<post_id>\d+)?$', views.vote, name='vote'),
+    re_path(r'^vote/(?P<post_id>\d+)?$', views.project, name='vote'),    
+    
+
+
+
+
 
     # re_path('project/', views.project, name='project'),
     # re_path(r'^project/(?P<post>\d+)?$', views.project, name='project'),  
