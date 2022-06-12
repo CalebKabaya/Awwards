@@ -13,8 +13,12 @@ import random
 
 def welcome(request):
     all_post=Post.objects.all()
+    # all_post=all_post[::-1]
+    a_post = random.randint(0, len(all_post)-1)
+    random_post = all_post[a_post]
 
-    return render(request,'index.html',{"all_post":all_post})
+    return render(request,'index.html',{"all_post":all_post,"random_post":random_post})
+
 def index(request):
     indexpost=Post.objects.filter(id=1)
 
