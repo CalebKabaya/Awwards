@@ -67,7 +67,7 @@ class Rating(models.Model):
         (9,'9'),
         (10,'10'),
     )
-    desing=models.IntegerField(choices=rating,default=0,blank=True)
+    design=models.IntegerField(choices=rating,default=0,blank=True)
     usability=models.IntegerField(choices=rating,blank=True)
     content=models.IntegerField(choices=rating,blank=True)
     score=models.FloatField(default=0,blank=True)
