@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container mt-5">
+  <div class="row">
+
+    {% if results%}
+    <h5>Found{{results.count}} Projects</h5>
+
+    {% for post in results%}
+
+    <div class="col-md-3" id="cont">
+      <div class="card h-100">
+        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+          <img src="{{post.photo.url}}" class="img-fluid" />
+          <a href="{url 'project' post.title}">
+            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+          </a>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{post.title}}</h5>
+          <p class="card-text">{{post.description}}</p>
+        </div>
+        <div class="card-footer">
+          
+          <small class="text-muted" id="small"><img src="{{post.user.profile.profile_picture.url}}"
+            class="nav-img mr-2"
+            alt=""></small>
+            <small class="text-muted" id="small"> Posted By: {{post.user.username|title}}</small>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted"><a href="{{post.link}}" class="tn btn-outline-dark">View</a> </small>
+        </div>
+      </div>
+
+    </div>
+    {% endfor%}
+    {% else%}
+    <h5>No results to match your search term</h5>
+
+    {% endif %}
+
+  </div>
+</div>
+
+{% endblock%}
+
+<!-- /project/{{post.id}} -->
