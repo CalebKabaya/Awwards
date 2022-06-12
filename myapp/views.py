@@ -13,7 +13,7 @@ import random
 
 def welcome(request):
     all_post=Post.objects.all()
-    # all_post=all_post[::-1]
+    all_post=all_post[::-1]
     a_post = random.randint(0, len(all_post)-1)
     random_post = all_post[a_post]
 
@@ -123,51 +123,13 @@ def postproject(request):
     }
     return render(request, 'newpost.html', context)
 
-# @login_required(login_url='/accounts/login/')
-# def postproject(request):
-#     if request.method == 'POST':
-#         form = PostForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             project = form.save(commit=False)
-#             project.user=request.user
-#             project.save()
-            
-#         return redirect('/')
-#     else:
-#         form = PostForm()
-        
-#     context = {
-#         'form':form,
-#     }
-#     return render(request, 'newpost.html', context)
 
-
-
-
-# @login_required(login_url='/accounts/login/')
-# def update_profile(request,username):
-#     user =User.objects.get(username=username)
-#     if request.method == 'POST':
-#         user_from=UpdateUserForm(request.Post,instance=request.user)
-#         prof_form=UpdateUserProfileForm(request.Post,request.FILES,instance=request.user.profile)
-#         if user_from.is_valid() and prof_form.is_valid():
-#             user_from.save
-#             prof_form.save
-#             return redirect('profile', user.username)
-#         else:
-#             user_form=UpdateUserForm(instance=request.user) 
-#             prof_form=UpdateUserProfileForm(instance=request.user.profile)  
-#         params={
-#             'user_form':user_form,
-#             'prof_form':prof_form,
-#         } 
-#         return render(request,'update.html',params)     
+    
 
 
 @login_required(login_url='login')
 def update_profile(request):
-    # images = request.user.profile.posts.all()
-    # images = Post.objects.all()  
+    
     if request.method == 'POST':
         user_form = UpdateUserForm(request.POST, instance=request.user)
         prof_form = UpdateUserProfileForm(request.POST, request.FILES, instance=request.user.profile)
@@ -181,15 +143,31 @@ def update_profile(request):
     contex = {
         'user_form': user_form,
         'prof_form': prof_form,
-        # 'images': images,
 
     }
     return render(request, 'update.html', contex)
 
+
+
+ 
+def search_project(request):
+    if request.method == 'GET':
+        title = request.GET.get("title")
+        results = Post.objects.filter(title__icontains=title).all()
+        message = f'name'
+        params = {
+            'results': results,
+            'message': message
+        }
+        return render(request, 'search.html', params)
+    else:
+        message = "You haven't searched for any image category"
+    return render(request, 'search.html', {'message': message})
+
 @login_required(login_url='login')
-def project(request, post):
-    post = Post.objects.get(title=post)
-    ratings = Rating.objects.filter(user=request.user, post=post).first()
+def project(request,post_id):
+    post = Post.objects.get(id=post_id)
+    ratings = Rating.objects.filter(user=request.user, id=post_id).first()
     rating_status = None
     if ratings is None:
         rating_status = False
@@ -225,24 +203,16 @@ def project(request, post):
         form = RatingsForm()
     params = {
         'post': post,
-        'rating_form': form,
+        'form': form,
         'rating_status': rating_status
 
     }
-    return render(request, 'project.html', params)
+    return render(request, 'singleproject.html', params)
 
- 
-def search_project(request):
-    if request.method == 'GET':
-        title = request.GET.get("title")
-        results = Post.objects.filter(title__icontains=title).all()
-        message = f'name'
-        params = {
-            'results': results,
-            'message': message
-        }
-        return render(request, 'search.html', params)
-    else:
-        message = "You haven't searched for any image category"
-    return render(request, 'search.html', {'message': message})
-
+# @login_required(login_url='login')
+# def vote(request,post_id):
+#     try:
+#         post = Post.objects.get(id = post_id)
+#     except DoesNotExist:
+#         raise Http404()
+#     return render(request,"vote.html", {"post":post})
