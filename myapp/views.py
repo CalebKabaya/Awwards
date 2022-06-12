@@ -6,6 +6,7 @@ from .models import Profile,Post, Rating
 from .forms import PostForm, RatingsForm, UpdateUserForm, UpdateUserProfileForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404,HttpResponseRedirect
+import random
 
 
 # Create your views here.
@@ -14,6 +15,10 @@ def welcome(request):
     all_post=Post.objects.all()
 
     return render(request,'index.html',{"all_post":all_post})
+def index(request):
+    indexpost=Post.objects.filter(id=1)
+
+    return render(request,'index.html',{"all_post":indexpost})    
 
 def signin(request):
     if request.method=="POST":
@@ -96,13 +101,44 @@ def postproject(request):
             project = form.save(commit=False)
             project.user=request.user
             project.save()
+            
         return redirect('/')
     else:
         form = PostForm()
+    try:
+        posts=Post.objects.all() 
+        posts=posts[::-1]
+        a_post = random.randint(0, len(posts)-1)
+        random_post = posts[a_post]
+    except Post.DoesNotExist:
+        posts=None
+
     context = {
         'form':form,
+        'random_post': random_post
     }
     return render(request, 'newpost.html', context)
+
+# @login_required(login_url='/accounts/login/')
+# def postproject(request):
+#     if request.method == 'POST':
+#         form = PostForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             project = form.save(commit=False)
+#             project.user=request.user
+#             project.save()
+            
+#         return redirect('/')
+#     else:
+#         form = PostForm()
+        
+#     context = {
+#         'form':form,
+#     }
+#     return render(request, 'newpost.html', context)
+
+
+
 
 # @login_required(login_url='/accounts/login/')
 # def update_profile(request,username):
@@ -146,50 +182,63 @@ def update_profile(request):
     }
     return render(request, 'update.html', contex)
 
-
-
 @login_required(login_url='login')
-def project(request,post):
-    post=Post.objects.get(title=post)
-    ratings=Rating.objects.filter(user=request,post=post).first()
-    rating_status=None
+def project(request, post):
+    post = Post.objects.get(title=post)
+    ratings = Rating.objects.filter(user=request.user, post=post).first()
+    rating_status = None
     if ratings is None:
-        rating_status=False
+        rating_status = False
     else:
-        rating_status=True  
+        rating_status = True
     if request.method == 'POST':
-        form =RatingsForm(request.POST)
+        form = RatingsForm(request.POST)
         if form.is_valid():
-            rate=form.save(commit=False)
-            rate.user=request.user
-            rate.post=post
+            rate = form.save(commit=False)
+            rate.user = request.user
+            rate.post = post
             rate.save()
-            post_ratings=Rating.objects.filter(post=post)
+            post_ratings = Rating.objects.filter(post=post)
 
-            desing_ratings=[d.desing for d in post_ratings]
-            desing_avarage=sum(desing_ratings)/len(desing_ratings)
+            design_ratings = [d.design for d in post_ratings]
+            design_average = sum(design_ratings) / len(design_ratings)
 
-            usability_rating=[usa.usability for usa in post_ratings]
-            usability_avarage=sum(usability_rating)/ len(usability_rating)
+            usability_ratings = [us.usability for us in post_ratings]
+            usability_average = sum(usability_ratings) / len(usability_ratings)
 
-            content_rating=[cont.content for cont in post_ratings]
-            content_avarage=sum(content_rating)/len(content_rating)
+            content_ratings = [content.content for content in post_ratings]
+            content_average = sum(content_ratings) / len(content_ratings)
 
-            score=(desing_avarage+usability_avarage+content_avarage)/3
-
-            rate.desing_avarage=round(desing_avarage,2)
-            rate.usability_avarage=round(usability_avarage,2)
-            rate.content_avarage=round(content_avarage,2)
-            rate.score=round(score,2)
+            score = (design_average + usability_average + content_average) / 3
+            print(score)
+            rate.design_average = round(design_average, 2)
+            rate.usability_average = round(usability_average, 2)
+            rate.content_average = round(content_average, 2)
+            rate.score = round(score, 2)
             rate.save()
             return HttpResponseRedirect(request.path_info)
     else:
-        form=RatingsForm()
-    params={
-        'post':post,
-        'rating_form':form,
-        'rating_status':rating_status
-    }
-    return render(request,'singleproject,html', params)  
+        form = RatingsForm()
+    params = {
+        'post': post,
+        'rating_form': form,
+        'rating_status': rating_status
 
+    }
+    return render(request, 'project.html', params)
+
+ 
+def search_project(request):
+    if request.method == 'GET':
+        title = request.GET.get("title")
+        results = Post.objects.filter(title__icontains=title).all()
+        message = f'name'
+        params = {
+            'results': results,
+            'message': message
+        }
+        return render(request, 'search.html', params)
+    else:
+        message = "You haven't searched for any image category"
+    return render(request, 'search.html', {'message': message})
 
