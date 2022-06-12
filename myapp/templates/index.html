@@ -11,7 +11,7 @@
       <div class="card h-100">
         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
           <img src="{{post.photo.url}}" class="img-fluid" />
-          <a href="#!">
+          <a href="{% url 'project'  %}">
             <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
           </a>
         </div>
@@ -21,7 +21,12 @@
         </div>
         <div class="card-footer">
           
-          <small class="text-muted"> Posted By: {{request.user}}</small>
+          <small class="text-muted" id="small"><img src="{{post.user.profile.profile_picture.url}}"
+            class="nav-img mr-2"
+            alt=""></small>
+            <small class="text-muted" id="small"> Posted By: {{post.user.username|title}}</small>
+        </div>
+        <div class="card-footer">
           <small class="text-muted"><a href="{{post.link}}" class="tn btn-outline-dark">View</a> </small>
         </div>
       </div>
