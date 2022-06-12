@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, Profile
+from .models import Post, Profile,Rating
 from django.contrib.auth.models import User
 
 
@@ -21,3 +21,9 @@ class UpdateUserProfileForm(forms.ModelForm):
     class Meta:
         model= Profile
         fields=('name','bio','profile_picture','location','contact_email')
+
+
+class RatingsForm(forms.ModelForm):
+    class Meta:
+        model = Rating
+        fields = ['design', 'usability', 'content']
