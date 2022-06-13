@@ -56,10 +56,12 @@
     height: 20px;
 }
 #post{
+    margin-top: 7%;
     height: 100vh;
 }
 .profile{
     height: 100vh;
+    margin-top: 3%;
 }
 #indexcontainer{
     margin-top: 7%;

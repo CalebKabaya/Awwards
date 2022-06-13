@@ -32,12 +32,15 @@
                 <li class="nav-item">
                     <a class="nav-link active mr-5" href="#">Hello {{request.user}}</a>
                 </li>
+                <li class="nav-item">
+                </li>
                 <!-- Default dropright button -->
 
                 <div class="dropdown">
                     <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                         data-mdb-toggle="dropdown" aria-expanded="false">
                         Profile
+
                     </a>
 
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -56,11 +59,12 @@
 
 
             </div>
-
+            
             <a class="nav-link" href="/signout/">
                 <button type="button" class="btn btn-light btn-rounded">Logout</button>
 
             </a>
+           
 
 
             {%else%}

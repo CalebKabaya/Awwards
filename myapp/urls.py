@@ -14,28 +14,12 @@ urlpatterns=[
     re_path('new-project/', views.postproject, name='newproject'),
     re_path('update', views.update_profile, name='update'),
     re_path('search/', views.search_project, name='search'),
-    re_path(r'^vote/(?P<post_id>\d+)?$', views.project, name='vote'),    
+    re_path(r'^vote/(?P<post_id>\d+)?$', views.project, name='vote'), 
+    re_path(r'^api/post/$', views.PostItems.as_view()),
+    re_path(r'^api/profile/$', views.ProfileItems.as_view())
+
+   
     
-
-
-
-
-
-  
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

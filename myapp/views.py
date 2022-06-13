@@ -7,6 +7,9 @@ from .forms import PostForm, RatingsForm, UpdateUserForm, UpdateUserProfileForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404,HttpResponseRedirect
 import random
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import PostSerializar,ProfileSerializer
 
 
 # Create your views here.
@@ -211,3 +214,16 @@ def project(request,post_id):
     }
     return render(request, 'singleproject.html', params)
 
+
+class PostItems(APIView):
+    def get(self,request,format=None):
+        all_list=Post.objects.all()
+        serializers=PostSerializar(all_list,many=True)
+        return Response(serializers.data)
+
+
+class ProfileItems(APIView):
+    def get(self,request,format=None):
+        all_list=Profile.objects.all()
+        serializers=ProfileSerializer(all_list,many=True)
+        return Response(serializers.data)
