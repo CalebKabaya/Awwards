@@ -10,6 +10,8 @@ import random
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import PostSerializar,ProfileSerializer
+from rest_framework import status
+from .permissions import IsAdminOrReadOnly
 
 
 # Create your views here.
@@ -216,10 +218,18 @@ def project(request,post_id):
 
 
 class PostItems(APIView):
+    permission_classes = (IsAdminOrReadOnly,)
     def get(self,request,format=None):
         all_list=Post.objects.all()
         serializers=PostSerializar(all_list,many=True)
         return Response(serializers.data)
+
+    def post(self,request,format=None):
+        serializers=PostSerializar(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data,status=status.HTTP_201_CREATED)
+        return Response(serializers.errors,status=status.HTTP_400_BAD_REQUEST)
 
 
 class ProfileItems(APIView):
