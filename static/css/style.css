@@ -1,6 +1,11 @@
-h1{
-    color: red;
+.navbar{
+    position: fixed;
+    top: 0;
+    left: 0; 
+    z-index: 9999;
+    width: 100%;
 }
+
 #cont img{
     width: 100%;
 }
@@ -55,4 +60,7 @@ h1{
 }
 .profile{
     height: 100vh;
+}
+#indexcontainer{
+    margin-top: 7%;
 }
