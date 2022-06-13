@@ -22,8 +22,8 @@
                     <!-- <a class="nav-link" href="#">Dashboard</a> -->
                     <form class="d-flex input-group w-auto" action="{% url 'search'%}" method="get">
                         {% csrf_token %}
-                        <input type="search" class="form-control rounded" name="title" placeholder="Search" aria-label="Search"
-                            aria-describedby="search-addon" />
+                        <input type="search" class="form-control rounded" name="title" placeholder="Search"
+                            aria-label="Search" aria-describedby="search-addon" />
                         <span class="input-group-text border-0" id="search-addon">
                             <i class="fas fa-search"></i>
                         </span>
@@ -33,17 +33,19 @@
                     <a class="nav-link active mr-5" href="#">Hello {{request.user}}</a>
                 </li>
                 <!-- Default dropright button -->
-                <div class="btn-group dropend">
-                    <button type="button" class="btn btn-dark dropdown-toggle" data-mdb-toggle="dropdown"
-                        aria-expanded="false">
+
+                <div class="dropdown">
+                    <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                        data-mdb-toggle="dropdown" aria-expanded="false">
                         Profile
-                    </button>
-                    <ul class="dropdown-menu">
+                    </a>
+
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <li><a class="dropdown-item" href="/profile/">My Profile</a></li>
-                        <li><a class="dropdown-item" href="{% url 'update'  %}">Update Profile</a></li>                        
+                        <li><a class="dropdown-item" href="{% url 'update'  %}">Update Profile</a></li>
                     </ul>
                 </div>
-               
+
             </ul>
 
             <div>
