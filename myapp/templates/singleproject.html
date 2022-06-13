@@ -107,9 +107,7 @@
     <div class="row">
         <div class="col-md-6">
             <h3>Rate this Project</h3>
-            {% if rating_status %}
-            <h5>You have already voted</h5>
-            {% else %}
+           
             {% if user.is_authenticated %}
             <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -117,8 +115,7 @@
                 <button class="btn btn-sm btn-info">Rate</button>
             </form>
             {% endif %}
-            {% endif %}
-        </div>
+       </div>
         <div class="col-md-6">
             <h3 class="D-block mx-auto">Ratings Scores</h3>
             {% for rating in post.ratings.all %}
@@ -143,5 +140,15 @@
 </div>
 {% endblock %}
 
-
+{% if rating_status %}
+<h5>You have already voted</h5>
+{% else %}
+{% if user.is_authenticated %}
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <button class="btn btn-sm btn-info">Rate</button>
+</form>
+{% endif %}
+{% endif %}
 
