@@ -50,3 +50,9 @@ h1{
     width: 20%;
     height: 20px;
 }
+#post{
+    height: 100vh;
+}
+.profile{
+    height: 100vh;
+}
