@@ -2,6 +2,8 @@ from django.urls import re_path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework.authtoken.views import obtain_auth_token
+
 
 urlpatterns=[
     re_path('^$',views.welcome,name='welcome'),
@@ -16,7 +18,9 @@ urlpatterns=[
     re_path('search/', views.search_project, name='search'),
     re_path(r'^vote/(?P<post_id>\d+)?$', views.project, name='vote'), 
     re_path(r'^api/post/$', views.PostItems.as_view()),
-    re_path(r'^api/profile/$', views.ProfileItems.as_view())
+    re_path(r'^api/profile/$', views.ProfileItems.as_view()),
+    re_path(r'^api-token-auth/', obtain_auth_token)
+
 
    
     
