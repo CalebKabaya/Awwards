@@ -6,40 +6,42 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% if title%}
-    <title>Awwards -{{title}}</title>
-    {%else%}
-    <title>Awwards</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% if title%}
+  <title>Awwards -{{title}}</title>
+  {%else%}
+  <title>Awwards</title>
 
-    {% endif%}
-    {% block styles%}
-    {% bootstrap_css%}
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
-    <!-- MDB -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.1.0/mdb.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    {% endblock%}
+  {% endif%}
+  {% block styles%}
+  {% bootstrap_css%}
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+  <!-- MDB -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.1.0/mdb.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  {% endblock%}
+  <link rel="shortcut icon" href="{% static 'images/d.png'%}" type="image/x-icon"/>
+
 </head>
 
 <body>
-    {% include 'navbar.html'%}
-    {% block content%}
+  {% include 'navbar.html'%}
+  {% block content%}
 
-    {% endblock %}
-    {% include 'footer.html'%}
+  {% endblock %}
+  {% include 'footer.html'%}
 
-    {% block scripts %}
-    {% bootstrap_javascript %}
+  {% block scripts %}
+  {% bootstrap_javascript %}
 
   <!-- MDB -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.1.0/mdb.min.js"></script>
-    {% endblock%}
+  {% endblock%}
 
 
 </body>
