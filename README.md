@@ -7,6 +7,16 @@ Awwards is an application which allows developers to post their projects and see
 
 [CalebKabaya](https://github.com/CalebKabaya/)
 
+
+## Screenshots
+
+```
+Landing Page
+```
+<img src="./static/images/e.png">
+
+
+
 ## Features
 
 
