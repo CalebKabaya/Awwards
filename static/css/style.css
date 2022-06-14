@@ -8,9 +8,14 @@
 
 #cont img{
     width: 100%;
+    object-fit: cover;
+  object-position: right top;
 }
+
+
 #add img{
     width: 100%;
+
 }
 #small img{
     width: 25%;
@@ -54,6 +59,7 @@
 #mypic img{
     width: 20%;
     height: 20px;
+
 }
 #post{
     margin-top: 7%;
@@ -70,4 +76,28 @@
     margin-top: 7%;
     height: 100vh;
 
+}
+#dropdownMenuLink{
+    margin-left: 20px;
+}
+
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 756px){
+    #indexcontainer{
+        margin-top: 15%;
+    }
+    #dropdownMenuLink{
+        margin-top: 10px;
+        margin-left: 0px;
+    }
+}
+@media only screen and (min-device-width: 0px) and (max-device-width: 320px) {
+    #indexcontainer{
+        margin-top: 25%;
+    }
+    #dropdownMenuLink{
+        margin-top: 10px;
+        margin-left: 0px;
+
+    }
 }
