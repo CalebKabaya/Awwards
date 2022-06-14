@@ -19,7 +19,9 @@ urlpatterns=[
     re_path(r'^vote/(?P<post_id>\d+)?$', views.project, name='vote'), 
     re_path(r'^api/post/$', views.PostItems.as_view()),
     re_path(r'^api/profile/$', views.ProfileItems.as_view()),
-    re_path(r'^api-token-auth/', obtain_auth_token)
+    re_path(r'^api-token-auth/', obtain_auth_token),
+    re_path('api/profile',views.ProfileItems.as_view(), name='apiprofiles'),
+
 
 
    
